@@ -1,0 +1,63 @@
+table,field,type,definition,source,allowed_values,owner,sensitivity
+loans,loan_id,string,Unique identifier for the loan,Loan origination system,Pattern L#####,Data Engineering,Internal
+loans,borrower_id,string,Foreign key to the borrower,Borrower master,Pattern B#####,Data Engineering,Internal
+loans,vehicle_id,string,Foreign key to the financed vehicle,Dealer inventory feed,Pattern V#####,Data Engineering,Internal
+loans,dealer_id,string,Foreign key to the originating dealer,Dealer master,Pattern D####,Dealer Operations,Internal
+loans,origination_date,date,Date the loan was funded,Loan origination system,YYYY-MM-DD,Loan Origination Ops,Internal
+loans,maturity_date,date,Scheduled final payment date (origination + term),Derived: origination_date + term_months,YYYY-MM-DD,Loan Origination Ops,Internal
+loans,term_months,integer,Loan term in months,Loan origination system,"12, 24, 36, 48, 60, 72, 84",Loan Origination Ops,Internal
+loans,loan_amount,decimal,Original principal financed,Loan origination system,> 0,Loan Origination Ops,Confidential
+loans,down_payment,decimal,Cash paid by the borrower at origination,Loan origination system,0 <= value < loan_amount,Loan Origination Ops,Confidential
+loans,interest_rate,decimal,Annual interest rate in percent,Loan origination system,0 < value <= 30,Loan Servicing Ops,Internal
+loans,monthly_payment,decimal,Scheduled monthly instalment from the amortisation formula,Derived: principal / rate / term,> 0,Loan Servicing Ops,Confidential
+loans,current_balance,decimal,Outstanding principal balance,Loan servicing system,0 <= value <= loan_amount,Loan Servicing Ops,Confidential
+loans,vehicle_year,integer,Model year of the financed vehicle,Dealer inventory feed,1990–2026,Dealer Operations,Internal
+loans,vehicle_make,string,Manufacturer of the financed vehicle,Dealer inventory feed,"Toyota, Ford, Chevrolet, Honda, Nissan, Hyundai",Dealer Operations,Internal
+loans,vehicle_model,string,Model of the financed vehicle,Dealer inventory feed,Make-dependent list,Dealer Operations,Internal
+loans,credit_score,integer,Borrower credit score at origination,Credit bureau pull,300–850,Credit Risk Analytics,Confidential
+loans,employment_status,string,Borrower employment status at origination,Loan application,"Employed, Self-Employed, Retired, Unemployed",Credit Risk Analytics,Internal
+loans,annual_income,decimal,Borrower stated annual income at origination,Loan application,> 0,Credit Risk Analytics,Confidential
+loans,state,string,US state of the borrower,Loan application,Valid US state code,Loan Origination Ops,Internal
+loans,loan_status,string,Current servicing status of the loan,Loan servicing system,"Current, Delinquent, Default, Paid Off, Charged Off",Loan Servicing Ops,Internal
+loans,delinquency_days,integer,Days past due on the most recent missed payment,Loan servicing system,>= 0; > 0 iff status is delinquent/default/charged-off,Loan Servicing Ops,Internal
+loans,last_payment_date,date,Date of the most recent payment received,Loan servicing system,YYYY-MM-DD; within 45 days of as-of date,Loan Servicing Ops,Internal
+loans,next_payment_due_date,date,Date the next payment is due,Derived: last_payment_date + 30 days,>= last_payment_date,Loan Servicing Ops,Internal
+loans,origination_channel,string,Channel through which the loan was originated,Loan origination system,"Dealer, Online, Branch",Loan Origination Ops,Internal
+loans,co_signer_flag,integer,1 if the loan has a co-signer else 0,Loan application,"0, 1",Credit Risk Analytics,Internal
+loans,loan_purpose,string,Purpose of the loan,Loan application,"New Vehicle, Used Vehicle, Refinance",Loan Origination Ops,Internal
+loans,ltv_ratio,decimal,Loan-to-value ratio at origination,Derived: loan_amount / vehicle value,0 < value <= 1.2,Credit Risk Analytics,Internal
+loans,dti_ratio,decimal,Debt-to-income ratio at origination,Derived: annual debt service / income,0–1,Credit Risk Analytics,Confidential
+loans,created_at,date,Record creation date,Loan origination system,YYYY-MM-DD,Data Engineering,Internal
+loans,updated_at,date,Date the record was last updated,Loan servicing system,YYYY-MM-DD; within 60 days of as-of date,Data Engineering,Internal
+borrowers,borrower_id,string,Unique identifier for the borrower,Borrower master,Pattern B#####,Data Engineering,Internal
+borrowers,first_name,string,Borrower first name (synthetic placeholder in this repo),Loan application,Free text,Data Engineering,Restricted
+borrowers,last_name,string,Borrower last name (synthetic placeholder in this repo),Loan application,Free text,Data Engineering,Restricted
+borrowers,date_of_birth,date,Borrower date of birth (synthetic placeholder in this repo),Loan application,YYYY-MM-DD,Data Engineering,Restricted
+borrowers,state,string,US state of residence,Borrower master,Valid US state code,Data Engineering,Internal
+borrowers,zip_code,string,Postal code of residence (synthetic placeholder in this repo),Loan application,5 digits,Data Engineering,Restricted
+borrowers,credit_bureau,string,Bureau that supplied the credit score,Credit bureau pull,"Equifax, Experian, TransUnion",Credit Risk Analytics,Internal
+borrowers,email_domain,string,Domain of the borrower contact email (synthetic placeholder in this repo),Loan application,Domain string,Data Engineering,Restricted
+borrowers,phone_type,string,Type of contact phone number,Loan application,"Mobile, Home, Work",Data Engineering,Internal
+borrowers,record_created_at,date,Date the borrower record was created,Borrower master,YYYY-MM-DD,Data Engineering,Internal
+vehicles,vehicle_id,string,Unique identifier for the vehicle,Dealer inventory feed,Pattern V#####,Data Engineering,Internal
+vehicles,vin,string,17-character vehicle identification number (synthetic in this repo),Dealer inventory feed,17 alphanumeric chars,Data Engineering,Confidential
+vehicles,make,string,Vehicle manufacturer,Dealer inventory feed,"Toyota, Ford, Chevrolet, Honda, Nissan, Hyundai",Dealer Operations,Internal
+vehicles,model,string,Vehicle model,Dealer inventory feed,Make-dependent list,Dealer Operations,Internal
+vehicles,model_year,integer,Vehicle model year,Dealer inventory feed,1990–2026,Dealer Operations,Internal
+vehicles,mileage,integer,Vehicle odometer reading in miles,Dealer inventory feed,>= 0,Dealer Operations,Internal
+vehicles,msrp,decimal,Manufacturer's suggested retail price in USD,Dealer inventory feed,> 0,Dealer Operations,Internal
+vehicles,vehicle_type,string,Body style of the vehicle,Dealer inventory feed,"Sedan, SUV, Truck, Hatchback",Dealer Operations,Internal
+vehicles,fuel_type,string,Fuel/powertrain type,Dealer inventory feed,"Gasoline, Hybrid, Electric",Dealer Operations,Internal
+dealers,dealer_id,string,Unique identifier for the dealer,Dealer master,Pattern D####,Dealer Operations,Internal
+dealers,dealer_name,string,Dealer business name,Dealer master,Free text,Dealer Operations,Public
+dealers,state,string,US state where the dealer is located,Dealer master,Valid US state code,Dealer Operations,Public
+dealers,region,string,Sales region of the dealer,Dealer master,"Midwest, South, West, Northeast",Dealer Operations,Internal
+dealers,dealer_tier,string,Dealer performance tier,Dealer master,"Tier 1, Tier 2, Tier 3",Dealer Operations,Internal
+payments,payment_id,string,Unique identifier for the payment,Loan servicing system,Pattern P######,Data Engineering,Internal
+payments,loan_id,string,Foreign key to the loan,Loan servicing system,Pattern L#####,Data Engineering,Internal
+payments,payment_date,date,Date the payment was made,Loan servicing system,YYYY-MM-DD,Payments Ops,Internal
+payments,amount_due,decimal,Amount scheduled for the payment,Loan servicing system,>= 0,Payments Ops,Confidential
+payments,amount_paid,decimal,Amount actually received,Loan servicing system,>= 0,Payments Ops,Confidential
+payments,payment_status,string,Processing status of the payment,Loan servicing system,"Completed, Pending, Failed, Reversed",Payments Ops,Internal
+payments,payment_method,string,Channel used for the payment,Loan servicing system,"ACH, Card, Check, Cash",Payments Ops,Internal
+payments,posted_at,date,Date the payment was posted to the ledger,Loan servicing system,YYYY-MM-DD,Payments Ops,Internal

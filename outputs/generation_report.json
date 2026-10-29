@@ -1,0 +1,40 @@
+{
+  "seed": 42,
+  "as_of": "2026-10-15",
+  "rows": {
+    "loans": 5010,
+    "borrowers": 4200,
+    "vehicles": 4800,
+    "dealers": 120,
+    "payments": 14959
+  },
+  "defects": {
+    "credit_score_null": 25,
+    "interest_rate_null": 15,
+    "credit_score_out_of_range": 18,
+    "interest_rate_invalid": 12,
+    "term_months_invalid": 10,
+    "loan_status_invalid": 8,
+    "borrower_dangling": 20,
+    "vehicle_dangling": 15,
+    "dealer_dangling": 10,
+    "stale_last_payment": 120,
+    "stale_updated_at": 80,
+    "balance_exceeds_loan": 22,
+    "down_payment_exceeds_loan": 14,
+    "maturity_mismatch": 30,
+    "delinquency_inconsistent": 40,
+    "payment_amount_off": 25,
+    "vehicle_year_out_of_range": 9,
+    "annual_income_nonpositive": 11,
+    "due_before_last_payment": 28,
+    "loan_amount_nonpositive": 7,
+    "ltv_exceeds_limit": 16,
+    "duplicate_loan_rows": 10,
+    "duplicate_vins": 12,
+    "payment_loan_dangling": 25,
+    "payment_amount_negative": 20,
+    "payment_status_invalid": 12
+  },
+  "note": "All data is synthetic. Defects are injected deliberately on disjoint row sets."
+}

@@ -1,0 +1,14 @@
+{
+  "n_issues": 500,
+  "seed": 7,
+  "manual_mean_hours": 50.26,
+  "manual_median_hours": 49.24,
+  "manual_same_day_pct": 14.0,
+  "automated_mean_hours": 4.4,
+  "automated_median_hours": 3.95,
+  "automated_same_day_pct": 100.0,
+  "improvement_factor": 11.4,
+  "manual_mean_days": 2.09,
+  "automated_mean_days": 0.18,
+  "definition": "Time from issue occurrence to owner acknowledgement + triage; simulation only, not a production measurement."
+}

@@ -1,0 +1,26 @@
+check_id,dimension,table,field,rows_checked,violations,violation_rate,status,severity,data_owner,owner_email
+DQ01,Completeness,loans,loan_id,5010,0,0.0,PASS,None,Credit Risk Analytics,credit-risk-analytics@example.com
+DQ02,Completeness,loans,credit_score,5010,25,0.00499,FAIL,Medium,Credit Risk Analytics,credit-risk-analytics@example.com
+DQ03,Completeness,loans,interest_rate,5010,15,0.002994,FAIL,Medium,Loan Servicing Ops,loan-servicing-ops@example.com
+DQ04,Validity,loans,credit_score,4985,18,0.003611,FAIL,Medium,Credit Risk Analytics,credit-risk-analytics@example.com
+DQ05,Validity,loans,interest_rate,4995,12,0.002402,FAIL,Medium,Loan Servicing Ops,loan-servicing-ops@example.com
+DQ06,Validity,loans,term_months,5010,10,0.001996,FAIL,Medium,Loan Origination Ops,loan-origination-ops@example.com
+DQ07,Validity,loans,loan_status,5010,8,0.001597,FAIL,Medium,Loan Servicing Ops,loan-servicing-ops@example.com
+DQ08,Uniqueness,loans,loan_id,5010,10,0.001996,FAIL,Medium,Data Engineering,data-engineering@example.com
+DQ09,Uniqueness,vehicles,vin,4800,12,0.0025,FAIL,Medium,Data Engineering,data-engineering@example.com
+DQ10,Referential integrity,loans,borrower_id,5010,20,0.003992,FAIL,Medium,Data Engineering,data-engineering@example.com
+DQ11,Referential integrity,loans,vehicle_id,5010,15,0.002994,FAIL,Medium,Data Engineering,data-engineering@example.com
+DQ12,Referential integrity,loans,dealer_id,5010,10,0.001996,FAIL,Medium,Dealer Operations,dealer-operations@example.com
+DQ13,Referential integrity,payments,loan_id,14959,25,0.001671,FAIL,Medium,Data Engineering,data-engineering@example.com
+DQ14,Freshness,loans,last_payment_date,5010,120,0.023952,FAIL,Critical,Loan Servicing Ops,loan-servicing-ops@example.com
+DQ15,Freshness,loans,updated_at,5010,80,0.015968,FAIL,High,Data Engineering,data-engineering@example.com
+DQ16,Range,loans,current_balance,5010,22,0.004391,FAIL,Medium,Loan Servicing Ops,loan-servicing-ops@example.com
+DQ17,Range,loans,down_payment,5003,14,0.002798,FAIL,Medium,Loan Origination Ops,loan-origination-ops@example.com
+DQ18,Consistency,loans,maturity_date,4995,30,0.006006,FAIL,High,Loan Origination Ops,loan-origination-ops@example.com
+DQ19,Consistency,loans,delinquency_days/loan_status,5010,40,0.007984,FAIL,High,Loan Servicing Ops,loan-servicing-ops@example.com
+DQ20,Consistency,loans,monthly_payment,4995,25,0.005005,FAIL,High,Loan Servicing Ops,loan-servicing-ops@example.com
+DQ21,Range,loans,vehicle_year,5010,9,0.001796,FAIL,Medium,Dealer Operations,dealer-operations@example.com
+DQ22,Range,loans,annual_income,5010,11,0.002196,FAIL,Medium,Credit Risk Analytics,credit-risk-analytics@example.com
+DQ23,Validity,payments,amount_paid/payment_status,14959,32,0.002139,FAIL,Medium,Payments Ops,payments-ops@example.com
+DQ24,Timeliness,loans,next_payment_due_date,5010,28,0.005589,FAIL,High,Loan Servicing Ops,loan-servicing-ops@example.com
+DQ25,Range,loans,loan_amount/ltv_ratio,5010,23,0.004591,FAIL,Medium,Credit Risk Analytics,credit-risk-analytics@example.com

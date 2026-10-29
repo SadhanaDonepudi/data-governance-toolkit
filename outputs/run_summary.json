@@ -1,0 +1,30 @@
+{
+  "n_checks": 25,
+  "n_pass": 1,
+  "n_fail": 24,
+  "dq_score_pct": 4.0,
+  "total_violations": 614,
+  "sql_matches_python": true,
+  "n_alerts_simulated": 24,
+  "response_time_simulation": {
+    "n_issues": 500,
+    "seed": 7,
+    "manual_mean_hours": 50.26,
+    "manual_median_hours": 49.24,
+    "manual_same_day_pct": 14.0,
+    "automated_mean_hours": 4.4,
+    "automated_median_hours": 3.95,
+    "automated_same_day_pct": 100.0,
+    "improvement_factor": 11.4,
+    "manual_mean_days": 2.09,
+    "automated_mean_days": 0.18,
+    "definition": "Time from issue occurrence to owner acknowledgement + triage; simulation only, not a production measurement."
+  },
+  "rows": {
+    "loans": 5010,
+    "borrowers": 4200,
+    "vehicles": 4800,
+    "dealers": 120,
+    "payments": 14959
+  }
+}
